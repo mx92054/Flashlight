@@ -92,7 +92,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	uint16_t aPer[] = {1340,1340,1340, 800,540,320,160,106,78,40} ;
 	uint16_t aPul[] = {99, 90, 80, 80, 80, 80, 80, 80,80,80} ;
-	int bFlash = 0 ;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -138,13 +137,6 @@ int main(void)
   {
 		Modbus_task() ;
 		
-		if ( mblock1.ptrRegs[12] && mblock1.ptrRegs[0] == 1 && bFlash == 0)
-		{
-			MX_TIM3_Init(aPer[0],aPul[0]) ;
-			HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
-			bFlash = 1 ;			
-		}		
-		
 		if ( GetTimer(0) )
 		{
 			HAL_IWDG_Refresh(&hiwdg) ;
@@ -186,11 +178,10 @@ int main(void)
 			mblock1.bSaved = 0 ;
 		}
 		
-		if ( GetTimer(3) && bFlash )
+		if ( GetTimer(3) && mblock1.ptrRegs[12] )
 		{
-			if ( bFlash++ > 3 )
+			if ( mblock1.ptrRegs[12]++ > 3 )
 			{
-				bFlash = 0 ;
 				mblock1.ptrRegs[12] = 0 ;
 				MX_TIM3_Init(mblock1.ptrRegs[10],0) ;
 				HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);					

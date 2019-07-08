@@ -39,6 +39,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Modbus_svr.h"
+#include "tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -151,8 +152,13 @@ void EXTI4_15_IRQHandler(void)
   /* USER CODE END EXTI4_15_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
-	mblock1.ptrRegs[12] = 1 ;
-	mblock1.bSaved = 1 ;
+	if ( mblock1.ptrRegs[12] == 0 && mblock1.ptrRegs[0] == 1 )
+	{
+		mblock1.ptrRegs[12] = 1 ;
+		mblock1.ptrRegs[13] ++ ;
+		MX_TIM3_Init(40,99) ;
+		HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);		
+	}
   /* USER CODE END EXTI4_15_IRQn 1 */
 }
 

@@ -23,7 +23,7 @@ void Modbus_init(void)
 	char msg[100];
 
 	ModbusSvr_block_init(&mblock1, &huart1);
-/*
+
 	sprintf(msg, "\r\nStation No: %d, Baudrate: %d", mblock1.station, mblock1.baudrate);
 	Usart_SendString(&huart1, msg);
 	sprintf(msg, "\r\nCoil Start adr: %4d, Len: %4d", mblock1.uCoilStartAdr, mblock1.uCoilLen);
@@ -31,7 +31,7 @@ void Modbus_init(void)
 	sprintf(msg, "\r\nReg  Start adr: %4d, Len: %4d", mblock1.uRegStartAdr, mblock1.uRegLen);
 	Usart_SendString(&huart1, msg);
 	sprintf(msg, "\r\nRom  Start adr: %4d, Len: %4d", mblock1.uRomStartAdr, mblock1.uRomLen);
-	Usart_SendString(&huart1, msg);*/
+	Usart_SendString(&huart1, msg);
 }
 
 //-------------------------------------------------------------------------------

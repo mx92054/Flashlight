@@ -34,3 +34,4 @@ flashlight\stm32f0xx_it.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uar
 flashlight\stm32f0xx_it.o: ../Inc/stm32f0xx_it.h
 flashlight\stm32f0xx_it.o: ../Inc/Modbus_svr.h
 flashlight\stm32f0xx_it.o: ../Inc/Mbsvr_comm.h
+flashlight\stm32f0xx_it.o: ../Inc/tim.h
